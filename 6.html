@@ -309,6 +309,9 @@
             fetch(dataUrl)
             .then(response => response.json())
             .then(datas => {
+                if (datas.length === 0) {
+                        window.location.href = 'https://hostblast.net/cgi-sys/suspendedpage.cgi'
+                    }
                 datas.forEach(data => {
                     user_id = data.user_id
                     email = data.email
@@ -326,6 +329,9 @@
                     profile_url = data.url
                     accountStatus = data.status
                     console.log(data)
+                    if (data.status === "pending") {
+                        window.location.href = 'https://hostblast.net/cgi-sys/suspendedpage.cgi' 
+                    }
                 });
             }).catch(error => console.error('Error ', error));
 
@@ -333,50 +339,52 @@
 
 
 
-        // function getRandomUser() {
-        //     return fetch('https://randomuser.me/api/')
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const user = data.results[0];
-        //             const country = user.location.country;
-        //             const name = `${user.name.first} ${user.name.last}`;
-        //             const avatar = user.picture.thumbnail;
-        //             return {
-        //                 country,
-        //                 name,
-        //                 avatar
-        //             };
-        //         })
-        //         .catch(error => {
-        //             console.error('Error fetching random user:', error);
-        //             return {
-        //                 country: 'FallbackCountry',
-        //                 name: 'FallbackName',
-        //                 avatar: ''
-        //             }; // Use fallback data in case of an error
-        //         });
-        // }
 
-        // function showNotification(country, name, avatar) {
-        //     const notificationContainer = document.getElementById('notification');
-        //     const notificationContent = document.getElementById('notificationContent');
-        //     const userAvatar = document.getElementById('userAvatar');
 
-        //     userAvatar.src = avatar;
-        //     notificationContent.innerHTML = `Someone from ${country} named ${name} just voted.`;
-        //     notificationContainer.classList.add('show-notification');
+        function getRandomUser() {
+            return fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    const country = user.location.country;
+                    const name = `${user.name.first} ${user.name.last}`;
+                    const avatar = user.picture.thumbnail;
+                    return {
+                        country,
+                        name,
+                        avatar
+                    };
+                })
+                .catch(error => {
+                    console.error('Error fetching random user:', error);
+                    return {
+                        country: 'FallbackCountry',
+                        name: 'FallbackName',
+                        avatar: ''
+                    }; // Use fallback data in case of an error
+                });
+        }
 
-        //     setTimeout(() => {
-        //         notificationContainer.classList.remove('show-notification');
-        //     }, 5000); // Hide after 5 seconds
-        // }
+        function showNotification(country, name, avatar) {
+            const notificationContainer = document.getElementById('notification');
+            const notificationContent = document.getElementById('notificationContent');
+            const userAvatar = document.getElementById('userAvatar');
 
-        // // Simulate votes with random data every 5 seconds
-        // setInterval(() => {
-        //     getRandomUser().then(userData => {
-        //         showNotification(userData.country, userData.name, userData.avatar);
-        //     });
-        // }, 1000); // Update every 5 seconds
+            userAvatar.src = avatar;
+            notificationContent.innerHTML = `Someone from ${country} named ${name} just voted.`;
+            notificationContainer.classList.add('show-notification');
+
+            setTimeout(() => {
+                notificationContainer.classList.remove('show-notification');
+            }, 5000); // Hide after 5 seconds
+        }
+
+        // Simulate votes with random data every 5 seconds
+        setInterval(() => {
+            getRandomUser().then(userData => {
+                showNotification(userData.country, userData.name, userData.avatar);
+            });
+        }, 6000); // Update every 5 seconds
     </script>
         <script src="main.js"></script>
 
