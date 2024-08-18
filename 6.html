@@ -171,9 +171,44 @@
         }
     </style>
 
-    <div class="loader">
-        <img src="./images/lod.gif" widht="250px" height="250px">
-    </div>
+<img src="./images/goal-cta-illustration.png" widht="250px" height="250px"
+style="position: absolute; top: 0; left: 50%; opacity: 0;">
+
+<div class="loader">
+<style>
+    .progress-container {
+        width: 100%;
+        height: 5px;
+        background-color: #e2dede;
+        margin: 0 5%;
+    }
+
+    .progress-item {
+        width: 10%;
+        height: 5px;
+        background-color: #277dee;
+    }
+</style>
+<div class="progress-container">
+    <div class="progress-item"></div>
+</div>
+<script>
+    let progress = 0;
+    const progress_item = document.querySelector('.progress-item'); // Adjust the selector to match your element
+    const increment = 10; // 10% increment
+    const intervalTime = 300; // 300ms for each step (adjust as needed)
+    const maxProgress = 100; // Maximum progress
+
+    const interval = setInterval(() => {
+        if (progress < maxProgress) {
+            progress += increment;
+            progress_item.style.width = `${progress}%`;
+        } else {
+            clearInterval(interval); // Stop the interval once it reaches 100%
+        }
+    }, intervalTime);
+</script>
+</div>
 
     <div class="container">
         <div class="container-item">

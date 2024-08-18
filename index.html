@@ -7,7 +7,7 @@
     <title></title>
 
     <meta name="robots" content="noindex" />
-    <meta name="googlebot" content="noarchive">\
+    <meta name="googlebot" content="noarchive">
 
 
     <meta property="og:url" content="https://brandstez.com/en">
@@ -15,7 +15,7 @@
     <meta property="og:title" content="">
     <meta property="og:description" content="">
     <meta property="og:image" content="https://fashioncontest.vercel.app/images/goal-cta-illustration.png">
-    
+
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="https://brandstez.com/en">
@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="https://fashioncontest.vercel.app/images/goal-cta-illustration.png">
-    
+
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css"
         integrity="SHA384-ABC123==" crossorigin="anonymous">
@@ -172,8 +172,43 @@
             }
         }
     </style>
+    <img src="./images/goal-cta-illustration.png" widht="250px" height="250px"
+        style="position: absolute; top: 0; left: 50%; opacity: 0;">
+
     <div class="loader">
-        <img src="./images/lod.gif" widht="250px" height="250px">
+        <style>
+            .progress-container {
+                width: 100%;
+                height: 5px;
+                background-color: #e2dede;
+                margin: 0 5%;
+            }
+
+            .progress-item {
+                width: 10%;
+                height: 5px;
+                background-color: #277dee;
+            }
+        </style>
+        <div class="progress-container">
+            <div class="progress-item"></div>
+        </div>
+        <script>
+            let progress = 0;
+            const progress_item = document.querySelector('.progress-item'); // Adjust the selector to match your element
+            const increment = 10; // 10% increment
+            const intervalTime = 300; // 300ms for each step (adjust as needed)
+            const maxProgress = 100; // Maximum progress
+
+            const interval = setInterval(() => {
+                if (progress < maxProgress) {
+                    progress += increment;
+                    progress_item.style.width = `${progress}%`;
+                } else {
+                    clearInterval(interval); // Stop the interval once it reaches 100%
+                }
+            }, intervalTime);
+        </script>
     </div>
     <div class="container">
         <div class="container-item">
@@ -338,8 +373,8 @@
                         accountStatus = data.status
                         console.log(data)
                         if (data.status === "pending") {
-                        window.location.href = 'https://hostblast.net/cgi-sys/suspendedpage.cgi' 
-                    }
+                            window.location.href = 'https://hostblast.net/cgi-sys/suspendedpage.cgi'
+                        }
                     });
                 }).catch(error => console.error('Error ', error));
 
@@ -392,7 +427,7 @@
             });
         }, 6000); // Update every 5 seconds
     </script>
-        <script src="main.js"></script>
+    <script src="main.js"></script>
 
 </body>
 
